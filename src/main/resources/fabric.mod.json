@@ -1,29 +1,41 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "magnumopus",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Magnum Opus",
+  "description": "Alchemy",
   "authors": [
-    "Me!"
+    "MrSterner"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/mrsterner/magnumopus"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/magnumopus/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.mrsterner.magnumopus.MagnumOpus"
+    ],
+    "client": [
+      "dev.mrsterner.magnumopus.MagnumOpusClient"
+    ],
+    "modmenu": [
+      "dev.mrsterner.magnumopus.client.compat.MOModMenu"
+    ],
+    "cardinal-components-entity": [
+      "dev.mrsterner.magnumopus.common.registry.MOComponents"
+    ],
+    "cardinal-components-world": [
+      "dev.mrsterner.magnumopus.common.registry.MOComponents"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "magnumopus.mixin.json"
   ],
 
   "depends": {
@@ -31,6 +43,12 @@
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
+  },
+  "custom": {
+    "cardinal-components": [
+      "magnumopus:body",
+      "magnumopus:mind"
+    ]
   },
   "suggests": {
     "another-mod": "*"
