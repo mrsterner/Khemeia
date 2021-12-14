@@ -1,9 +1,13 @@
 package dev.mrsterner.magnumopus.common.utils;
 
 import dev.mrsterner.magnumopus.MagnumOpus;
+import dev.mrsterner.magnumopus.common.body.BodyParts;
+import dev.mrsterner.magnumopus.common.registry.MOComponents;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -14,7 +18,36 @@ import java.util.Map;
 
 public class MOUtils {
 
+    public static EntityDimensions getBodyHitbox(PlayerEntity player){
+        if(!MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.HEAD)){
+            return EntityDimensions.changing(0.6F, 1.45F);
+        } else if(
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.TORSO) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTARM) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTARM) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTLEG) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG)){
+            return EntityDimensions.changing(0.5F, 0.5F);
 
+        }else if(!MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTLEG) && !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG)) {
+            return EntityDimensions.changing(0.6F, 1.15F);
+        }
+        return EntityDimensions.changing(0.6F, 1.8F);
+    }
+    public static float getEyesHeight(PlayerEntity player){
+        if(
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.TORSO) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTARM) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTARM) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTLEG) &&
+        !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG)){
+            return 0.25F;
+
+        }else if(!MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTLEG) && !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG)) {
+            return 0.85F;
+        }
+        return 1.62F;
+    }
 
 
 

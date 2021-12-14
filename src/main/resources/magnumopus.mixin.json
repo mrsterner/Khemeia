@@ -4,9 +4,12 @@
   "package": "dev.mrsterner.magnumopus.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "PlayerEntityMixin"
   ],
   "client": [
-    "ExampleMixin"
+    "PlayerEntityRendererMixin",
+    "LivingEntityRendererMixin",
+    "BipedEntityModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

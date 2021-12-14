@@ -1,6 +1,8 @@
 package dev.mrsterner.magnumopus.common.body;
 
+
 import java.util.Locale;
+
 
 public enum BodyParts {
     HEAD(),
@@ -9,7 +11,8 @@ public enum BodyParts {
     RIGHTARM(),
     LEFTLEG(),
     RIGHTLEG(),
-    EYES();
+    EYES(),
+    STOMACH();
 
 
     BodyParts(){
@@ -29,6 +32,7 @@ public enum BodyParts {
         string.equals("rightarm") ? RIGHTARM :
         string.equals("leftleg") ? LEFTLEG :
         string.equals("rightleg") ? RIGHTLEG :
+        string.equals("stomach") ? STOMACH :
         EYES;
     }
 

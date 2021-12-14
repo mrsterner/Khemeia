@@ -10,60 +10,62 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class BodyComponent implements IBody, AutoSyncedComponent, PlayerComponent<BodyComponent> {
-    public Map<BodyParts, Boolean> PARTS = new LinkedHashMap<>();
+    private final Map<BodyParts, Boolean> bodyParts = new LinkedHashMap(){{
+        put(BodyParts.HEAD, true);
+        put(BodyParts.TORSO, true);
+        put(BodyParts.LEFTLEG, true);
+        put(BodyParts.RIGHTLEG, true);
+        put(BodyParts.LEFTARM, true);
+        put(BodyParts.RIGHTARM, true);
+        put(BodyParts.EYES, true);
+        put(BodyParts.STOMACH, true);
+    }};
     private final PlayerEntity player;
 
     public BodyComponent(PlayerEntity player) {
-        PARTS.put(BodyParts.HEAD, true);
-        PARTS.put(BodyParts.TORSO, true);
-        PARTS.put(BodyParts.LEFTARM, true);
-        PARTS.put(BodyParts.RIGHTARM, true);
-        PARTS.put(BodyParts.LEFTLEG, true);
-        PARTS.put(BodyParts.RIGHTLEG, true);
         this.player = player;
     }
 
+
     @Override
     public void setBodyPart(BodyParts bodyPart, boolean b) {
-        if(!hasBodyPart(bodyPart)){
-            PARTS.replace(bodyPart, true);
-            MOComponents.BODY_COMPONENT.sync(player);
-        }
+        bodyParts.replace(bodyPart, b);
+        MOComponents.BODY_COMPONENT.sync(player);
     }
 
     @Override
     public Map<BodyParts, Boolean> getBodyPart() {
-        return PARTS;
+        return bodyParts;
     }
 
     @Override
-    public boolean hasBodyPart(BodyParts bodyParts) {
-        return PARTS.get(bodyParts);
+    public boolean hasBodyPart(BodyParts bodyPart) {
+        return bodyParts.get(bodyPart);
     }
 
-    @Override
     public void serverTick() {
 
     }
 
-    @Override
-    public void copyForRespawn(BodyComponent original, boolean lossless, boolean keepInventory, boolean sameCharacter) {
-        if(lossless){
-            copyFrom(original);
-        }else{
-            PARTS = original.PARTS;
+    public float getHeight(){
+        if(!MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG) && !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTLEG)){
+            if(!MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.TORSO) && !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.LEFTARM) && !MOComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTARM)){
+                return 0.55F;
+            }
+            return 1.2F;
         }
+        return 1.8F;
     }
 
     @Override
     public void readFromNbt(NbtCompound tag) {
         int index = 0;
         NbtList bodyPartList = tag.getList("BodyParts", NbtType.COMPOUND);
-        for(Map.Entry<BodyParts, Boolean> entry : PARTS.entrySet()){
+        for(Map.Entry<BodyParts, Boolean> entry : bodyParts.entrySet()){
             NbtCompound bodyCompund = bodyPartList.getCompound(index);
             setBodyPart(entry.getKey().fromString(bodyCompund.getString("BodyPart")), entry.getValue());
             index++;
@@ -78,7 +80,7 @@ public class BodyComponent implements IBody, AutoSyncedComponent, PlayerComponen
 
     public NbtList toNbtBody() {
         NbtList bodyList = new NbtList();
-        PARTS.forEach((bodyParts, aBoolean) -> {
+        bodyParts.forEach((bodyParts, aBoolean) -> {
             NbtCompound bodyCompound = new NbtCompound();
             bodyCompound.putString("BodyPart", bodyParts.toString());
             bodyCompound.putBoolean("Has", aBoolean);
@@ -87,6 +89,4 @@ public class BodyComponent implements IBody, AutoSyncedComponent, PlayerComponen
         });
         return bodyList;
     }
-
-
 }
