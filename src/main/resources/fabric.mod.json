@@ -1,41 +1,41 @@
 {
   "schemaVersion": 1,
-  "id": "magnumopus",
+  "id": "khemeia",
   "version": "${version}",
 
-  "name": "Magnum Opus",
+  "name": "Khemeia",
   "description": "Alchemy",
   "authors": [
     "MrSterner"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/mrsterner/magnumopus"
+    "sources": "https://github.com/mrsterner/khemeia"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/magnumopus/icon.png",
+  "icon": "assets/khemeia/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.mrsterner.magnumopus.MagnumOpus"
+      "dev.mrsterner.khemeia.Khemeia"
     ],
     "client": [
-      "dev.mrsterner.magnumopus.MagnumOpusClient"
+      "dev.mrsterner.khemeia.KhemeiaClient"
     ],
     "modmenu": [
-      "dev.mrsterner.magnumopus.client.compat.MOModMenu"
+      "dev.mrsterner.khemeia.client.compat.KhemeiaModMenu"
     ],
     "cardinal-components-entity": [
-      "dev.mrsterner.magnumopus.common.registry.MOComponents"
+      "dev.mrsterner.khemeia.common.registry.KhemeiaComponents"
     ],
     "cardinal-components-world": [
-      "dev.mrsterner.magnumopus.common.registry.MOComponents"
+      "dev.mrsterner.khemeia.common.registry.KhemeiaComponents"
     ]
   },
   "mixins": [
-    "magnumopus.mixin.json"
+    "khemeia.mixin.json"
   ],
 
   "depends": {
@@ -46,8 +46,8 @@
   },
   "custom": {
     "cardinal-components": [
-      "magnumopus:body",
-      "magnumopus:mind"
+      "khemeia:body",
+      "khemeia:mind"
     ]
   },
   "suggests": {

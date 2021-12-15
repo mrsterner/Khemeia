@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.mrsterner.khemeia.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "PlayerEntityMixin"
+  ],
+  "client": [
+    "PlayerEntityRendererMixin",
+    "LivingEntityRendererMixin",
+    "BipedEntityModelMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
