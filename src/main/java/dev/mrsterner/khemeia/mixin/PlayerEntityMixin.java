@@ -1,5 +1,7 @@
 package dev.mrsterner.khemeia.mixin;
 
+import dev.mrsterner.khemeia.common.body.BodyParts;
+import dev.mrsterner.khemeia.common.registry.KhemeiaComponents;
 import dev.mrsterner.khemeia.common.utils.KhemeiaUtils;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
@@ -21,15 +23,27 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Inject(at = @At("RETURN"), method = "getDimensions", cancellable = true)
     private void onGetDimensions(EntityPose pose, CallbackInfoReturnable<EntityDimensions> info) {
-            PlayerEntity player = (PlayerEntity)(Object)this;
-            info.setReturnValue(KhemeiaUtils.getBodyHitbox(player));
+        PlayerEntity player = (PlayerEntity)(Object)this;
+        if(!KhemeiaComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.HEAD)){
+            info.setReturnValue(EntityDimensions.changing(0.6F, 1.45F));
+        } else if(KhemeiaUtils.ifMissingArmsLegsTorso(player)){
+            info.setReturnValue(EntityDimensions.changing(0.5F, 0.5F));
+
+        }else if(KhemeiaUtils.ifMissingLegs(player)) {
+            info.setReturnValue(EntityDimensions.changing(0.6F, 1.15F));
+        }
     }
 
     @Inject(method = "getActiveEyeHeight", at = @At("HEAD"), cancellable = true)
     private void onGetActiveEyeHeight(EntityPose pose, EntityDimensions dimensions, CallbackInfoReturnable<Float> cir) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         try {
-            cir.setReturnValue(KhemeiaUtils.getEyesHeight(player));
+            if(KhemeiaUtils.ifMissingArmsLegsTorso(player)){
+                cir.setReturnValue(0.25F);
+
+            }else if(KhemeiaUtils.ifMissingLegs(player)) {
+                cir.setReturnValue(0.85F);
+            }
         } catch (NullPointerException ignored) {}
     }
 }

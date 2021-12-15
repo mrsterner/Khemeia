@@ -14,12 +14,6 @@
     "facing=south": {
       "model": "khemeia:block/dwarf_in_a_flask",
       "y":  180
-    },
-    "facing=up": {
-      "model": "khemeia:block/dwarf_in_a_flask"
-    },
-    "facing=down": {
-      "model": "khemeia:block/dwarf_in_a_flask"
     }
   }
 }

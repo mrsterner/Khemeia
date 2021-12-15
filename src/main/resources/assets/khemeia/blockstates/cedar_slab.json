@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "khemeia:block/cedar_slab"
+    },
+    "type=double": {
+      "model": "khemeia:block/cedar_planks"
+    },
+    "type=top": {
+      "model": "khemeia:block/cedar_slab_top"
+    }
+  }
+}
