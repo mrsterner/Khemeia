@@ -4,12 +4,18 @@
   "package": "dev.mrsterner.khemeia.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PlayerEntityMixin"
+    "BlockEntityTypeMixin",
+    "BlocksMixin",
+    "PlayerEntityMixin",
+    "SimpleBlockStateProviderMixin"
   ],
   "client": [
-    "PlayerEntityRendererMixin",
+    "BipedEntityModelMixin",
     "LivingEntityRendererMixin",
-    "BipedEntityModelMixin"
+    "PlayerEntityRendererMixin",
+    "SignBlockEntityRendererMixin",
+    "SignEditScreenMixin",
+    "TexturedRenderLayersMixin"
   ],
   "injectors": {
     "defaultRequire": 1

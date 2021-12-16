@@ -1,15 +1,21 @@
 package dev.mrsterner.khemeia.common.registry;
 
-import dev.mrsterner.khemeia.common.block.CedarLogBlock;
+import dev.mrsterner.khemeia.Khemeia;
+import dev.mrsterner.khemeia.common.block.cedar.*;
 import dev.mrsterner.khemeia.common.block.DwarfInAFlaskBlock;
 import dev.mrsterner.khemeia.common.block.blockentity.DwarfInAFlaskBlockEntity;
 import dev.mrsterner.khemeia.common.item.KhemeiaDebugItem;
+import dev.mrsterner.khemeia.common.world.generator.tree.CedarSaplingGenerator;
+import dev.mrsterner.khemeia.mixin.BlocksMixin;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
+import net.minecraft.item.SignItem;
+import net.minecraft.item.TallBlockItem;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import static dev.mrsterner.khemeia.common.utils.KhemeiaUtils.*;
@@ -45,12 +51,24 @@ public class KhemeiaObjects {
     public static final Block CEDAR_SLAB = register("cedar_slab", new SlabBlock(copyOf(Blocks.OAK_SLAB)), true);
     public static final Block CEDAR_FENCE = register("cedar_fence", new FenceBlock(copyOf(Blocks.OAK_FENCE)), true);
     public static final Block CEDAR_FENCE_GATE = register("cedar_fence_gate", new FenceGateBlock(copyOf(Blocks.OAK_FENCE_GATE)), true);
-
+    public static final Block CEDAR_LEAVES = register("cedar_leaves", BlocksMixin.callCreateLeavesBlock(BlockSoundGroup.GRASS), true);
+    public static final Block CEDAR_SAPLING = register("cedar_sapling", new CedarSaplingBlock(new CedarSaplingGenerator(), copyOf(Blocks.OAK_SAPLING)), true);
+    public static final Block POTTED_CEDAR_SAPLING = register("potted_cedar_sapling", new FlowerPotBlock(CEDAR_SAPLING, copyOf(Blocks.POTTED_OAK_SAPLING)), false);
+    public static final Block CEDAR_PRESSURE_PLATE = register("cedar_pressure_plate", new CedarPressurePlateBlock(copyOf(Blocks.OAK_PRESSURE_PLATE)), true);
+    public static final Block CEDAR_BUTTON = register("cedar_button", new CedarButtonBlock(copyOf(Blocks.OAK_BUTTON)), true);
+    public static final Block CEDAR_TRAPDOOR = register("cedar_trapdoor", new CedarTrapdoorBlock(copyOf(Blocks.OAK_TRAPDOOR)), true);
+    public static final Block CEDAR_DOOR = register("cedar_door", new CedarDoorBlock(copyOf(Blocks.OAK_DOOR)), false);
+    public static final Item CEDAR_DOOR_ITEM = register("cedar_door", new TallBlockItem(CEDAR_DOOR, gen()));
+    public static final Block CEDAR_CHEST = register("cedar_chest", new CedarChestBlock(copyOf(Blocks.CHEST), () -> KhemeiaEntityTypes.CEDAR_CHEST_BLOCK_ENTITY, false), true);
+    public static final Block TRAPPED_CEDAR_CHEST = register("trapped_cedar_chest", new CedarChestBlock(copyOf(Blocks.CHEST), () -> KhemeiaEntityTypes.CEDAR_CHEST_BLOCK_ENTITY, true), true);
+    private static final Identifier CEDAR_SIGN_TEXTURE = new Identifier(Khemeia.MODID, "entity/sign/cedar");
+    public static final CedarSignBlock CEDAR_SIGN = register("cedar_sign", new CedarSignBlock(CEDAR_SIGN_TEXTURE, copyOf(Blocks.OAK_SIGN)), false);
+    public static final Block CEDAR_WALL_SIGN = register("cedar_wall_sign", new CedarWallSignBlock(CEDAR_SIGN_TEXTURE, copyOf(Blocks.OAK_WALL_SIGN)), false);
+    public static final Item CEDAR_SIGN_ITEM = register("cedar_sign", new SignItem(gen().maxCount(16), CEDAR_SIGN, CEDAR_WALL_SIGN));
 
     public static final Block DWARF_IN_A_FLASK_BLOCK = registerBlockItem("dwarf_in_a_flask", new DwarfInAFlaskBlock(FabricBlockSettings.of(Material.GLASS).hardness(2.0F).breakInstantly()), true);
 
 
-    public static final BlockEntityType<DwarfInAFlaskBlockEntity> DWARF_IN_A_FLASK_BLOCK_ENTITY = register("dwarf_in_a_flask_block_entity", FabricBlockEntityTypeBuilder.create(DwarfInAFlaskBlockEntity::new, DWARF_IN_A_FLASK_BLOCK).build(null));
 
 
     public static void init() {

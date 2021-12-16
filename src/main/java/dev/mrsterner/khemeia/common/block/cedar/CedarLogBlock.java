@@ -1,4 +1,4 @@
-package dev.mrsterner.khemeia.common.block;
+package dev.mrsterner.khemeia.common.block.cedar;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

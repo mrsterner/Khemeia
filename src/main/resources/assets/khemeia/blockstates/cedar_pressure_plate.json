@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "khemeia:block/cedar_pressure_plate"
+    },
+    "powered=true": {
+      "model": "khemeia:block/cedar_pressure_plate_down"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 package dev.mrsterner.khemeia;
 
 import dev.mrsterner.khemeia.common.registry.KhemeiaObjects;
+import dev.mrsterner.khemeia.common.registry.KhemeiaWorldGenerators;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -20,5 +21,6 @@ public class Khemeia implements ModInitializer {
 		AutoConfig.register(KhemeiaConfig.class, GsonConfigSerializer::new);
 		config = AutoConfig.getConfigHolder(KhemeiaConfig.class).getConfig();
 		KhemeiaObjects.init();
+		KhemeiaWorldGenerators.init();
 	}
 }

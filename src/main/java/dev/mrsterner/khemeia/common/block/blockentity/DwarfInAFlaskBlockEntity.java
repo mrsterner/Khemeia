@@ -1,5 +1,6 @@
 package dev.mrsterner.khemeia.common.block.blockentity;
 
+import dev.mrsterner.khemeia.common.registry.KhemeiaEntityTypes;
 import dev.mrsterner.khemeia.common.registry.KhemeiaObjects;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -16,7 +17,7 @@ public class DwarfInAFlaskBlockEntity extends BlockEntity implements IAnimatable
     public int hit = 0;
     private final AnimationFactory factory = new AnimationFactory(this);
     public DwarfInAFlaskBlockEntity(BlockPos pos, BlockState state) {
-        super(KhemeiaObjects.DWARF_IN_A_FLASK_BLOCK_ENTITY, pos, state);
+        super(KhemeiaEntityTypes.DWARF_IN_A_FLASK_BLOCK_ENTITY, pos, state);
     }
 
     private <E extends BlockEntity & IAnimatable> PlayState predicate(AnimationEvent<E> event) {
