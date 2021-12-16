@@ -19,13 +19,13 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.AcaciaFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.trunk.ForkingTrunkPlacer;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 public class KhemeiaWorldGenerators {
     private static final FeatureSize EMPTY_SIZE = new TwoLayersFeatureSize(0, 0, 0);
 
-    public static final ConfiguredFeature<TreeFeatureConfig, ?> CEDAR_TREE = Feature.TREE.configure(
-    new TreeFeatureConfig.Builder(SimpleBlockStateProviderMixin.callInit(KhemeiaObjects.CEDAR_LOG.getDefaultState()), new ForkingTrunkPlacer(5, 0, 0),
-    SimpleBlockStateProviderMixin.callInit(KhemeiaObjects.CEDAR_LEAVES.getDefaultState()), new SpruceFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(5)), EMPTY_SIZE).ignoreVines().build());
+    public static final ConfiguredFeature<TreeFeatureConfig, ?> CEDAR_TREE = Feature.TREE.configure(new TreeFeatureConfig.Builder(SimpleBlockStateProviderMixin.callInit(KhemeiaObjects.CEDAR_LOG.getDefaultState()), new StraightTrunkPlacer(12, 0, 1),
+    SimpleBlockStateProviderMixin.callInit(KhemeiaObjects.CEDAR_LEAVES.getDefaultState()), new SpruceFoliagePlacer(ConstantIntProvider.create(3), ConstantIntProvider.create(0), ConstantIntProvider.create(1)), EMPTY_SIZE).ignoreVines().build());
 
     public static final PlacedFeature CEDAR_TREE_WITH_CHANCE = CEDAR_TREE.withPlacement(VegetationPlacedFeatures.modifiersWithWouldSurvive(RarityFilterPlacementModifier.of(10), KhemeiaObjects.CEDAR_SAPLING));
 
@@ -34,7 +34,7 @@ public class KhemeiaWorldGenerators {
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(Khemeia.MODID, "cedar_tree"), CEDAR_TREE);
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(Khemeia.MODID, "cedar_tree"), CEDAR_TREE_WITH_CHANCE);
         BiomeModification worldGen = BiomeModifications.create(new Identifier(Khemeia.MODID, "world_features"));
-        worldGen.add(ModificationPhase.ADDITIONS, BiomeSelectors.categories(Biome.Category.MOUNTAIN), context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, CEDAR_TREE_WITH_CHANCE));
+        worldGen.add(ModificationPhase.ADDITIONS, BiomeSelectors.categories(Biome.Category.FOREST), context -> context.getGenerationSettings().addBuiltInFeature(GenerationStep.Feature.VEGETAL_DECORATION, CEDAR_TREE_WITH_CHANCE));
 
     }
 }

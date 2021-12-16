@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "khemeia:cedar_log",
+    "khemeia:cedar_wood",
+    "khemeia:stripped_cedar_log",
+    "khemeia:stripped_cedar_wood"
+  ]
+}

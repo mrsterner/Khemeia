@@ -9,6 +9,8 @@ import dev.mrsterner.khemeia.common.world.generator.tree.CedarSaplingGenerator;
 import dev.mrsterner.khemeia.mixin.BlocksMixin;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
@@ -48,6 +50,7 @@ public class KhemeiaObjects {
     public static final Block CEDAR_LOG = register("cedar_log", new CedarLogBlock(() -> STRIPPED_CEDAR_LOG, MapColor.BROWN, copyOf(STRIPPED_CEDAR_LOG)), true);
     public static final Block CEDAR_WOOD = register("cedar_wood", new CedarLogBlock(() -> STRIPPED_CEDAR_WOOD, MapColor.BROWN, copyOf(STRIPPED_CEDAR_LOG)), true);
     public static final Block CEDAR_PLANKS = register("cedar_planks", new Block(copyOf(Blocks.OAK_PLANKS)), true);
+    public static final Block CEDAR_STAIRS = register("cedar_stairs", new CedarStairsBlock(CEDAR_PLANKS, copyOf(Blocks.OAK_STAIRS)), true);
     public static final Block CEDAR_SLAB = register("cedar_slab", new SlabBlock(copyOf(Blocks.OAK_SLAB)), true);
     public static final Block CEDAR_FENCE = register("cedar_fence", new FenceBlock(copyOf(Blocks.OAK_FENCE)), true);
     public static final Block CEDAR_FENCE_GATE = register("cedar_fence_gate", new FenceGateBlock(copyOf(Blocks.OAK_FENCE_GATE)), true);
@@ -76,5 +79,20 @@ public class KhemeiaObjects {
         BLOCK_ENTITY_TYPES.keySet().forEach(blockEntityType -> Registry.register(Registry.BLOCK_ENTITY_TYPE, BLOCK_ENTITY_TYPES.get(blockEntityType), blockEntityType));
         FLUIDS.keySet().forEach(fluid -> Registry.register(Registry.FLUID, FLUIDS.get(fluid), fluid));
         ITEMS.keySet().forEach(item -> Registry.register(Registry.ITEM, ITEMS.get(item), item));
+
+        FuelRegistry fuelRegistry = FuelRegistry.INSTANCE;
+        fuelRegistry.add(CEDAR_FENCE, 300);
+        fuelRegistry.add(CEDAR_FENCE_GATE, 300);
+        FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
+        flammableRegistry.add(STRIPPED_CEDAR_LOG, 5, 5);
+        flammableRegistry.add(STRIPPED_CEDAR_WOOD, 5, 5);
+        flammableRegistry.add(CEDAR_LOG, 5, 5);
+        flammableRegistry.add(CEDAR_WOOD, 5, 5);
+        flammableRegistry.add(CEDAR_LEAVES, 30, 60);
+        flammableRegistry.add(CEDAR_PLANKS, 5, 20);
+        flammableRegistry.add(CEDAR_STAIRS, 5, 20);
+        flammableRegistry.add(CEDAR_SLAB, 5, 20);
+        flammableRegistry.add(CEDAR_FENCE, 5, 20);
+        flammableRegistry.add(CEDAR_FENCE_GATE, 5, 20);
     }
 }

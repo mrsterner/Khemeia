@@ -8,10 +8,14 @@ import dev.mrsterner.khemeia.common.registry.SpriteIdentifierRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer;
 import net.minecraft.client.util.SpriteIdentifier;
+import net.minecraft.item.DyeableItem;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.renderers.geo.GeoItemRenderer;
 
@@ -37,5 +41,14 @@ public class KhemeiaClient implements ClientModInitializer {
 		SpriteIdentifierRegistry.INSTANCE.addIdentifier(TRAPPED_CEDAR_CHEST_LEFT);
 		SpriteIdentifierRegistry.INSTANCE.addIdentifier(CEDAR_CHEST_RIGHT);
 		SpriteIdentifierRegistry.INSTANCE.addIdentifier(TRAPPED_CEDAR_CHEST_RIGHT);
+
+		// ColorProvider
+		ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) ->
+		view != null && pos != null ? BiomeColors.getFoliageColor(view, pos) :
+		FoliageColors.getDefaultColor(), KhemeiaObjects.CEDAR_LEAVES);
+
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? 0x3f4f3b : 0xffffff, KhemeiaObjects.CEDAR_LEAVES.asItem());
+
+
 	}
 }
