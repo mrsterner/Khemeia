@@ -44,7 +44,7 @@ public class KhemeiaObjects {
     public static final Item SOUL_OF_NETHER = register("soul_of_nether", new Item(gen()));
     public static final Item SOUL_OF_END = register("soul_of_end", new Item(gen()));
     public static final Item OUROBOURUS = register("ouroboros", new Item(gen()));
-    public static final Item MO_DEBUG_STICK = register("mo_debug_stick", new KhemeiaDebugItem(gen()));
+
 
     public static final Block LIMESTONE = register("limestone", new Block(copyOf(Blocks.STONE)), true);
     public static final Block COBBLED_LIMESTONE = register("cobbled_limestone", new Block(copyOf(Blocks.COBBLESTONE)), true);
@@ -77,7 +77,7 @@ public class KhemeiaObjects {
 
     public static final Block DWARF_IN_A_FLASK_BLOCK = registerBlockItem("dwarf_in_a_flask", new DwarfInAFlaskBlock(FabricBlockSettings.of(Material.GLASS).hardness(2.0F).breakInstantly()), true);
 
-
+    public static final Item MO_DEBUG_STICK = register("mo_debug_stick", new KhemeiaDebugItem(gen()));
 
 
     public static void init() {
