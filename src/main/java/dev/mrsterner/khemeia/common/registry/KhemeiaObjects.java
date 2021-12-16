@@ -1,6 +1,7 @@
 package dev.mrsterner.khemeia.common.registry;
 
 import dev.mrsterner.khemeia.Khemeia;
+import dev.mrsterner.khemeia.common.block.LimestonePillar;
 import dev.mrsterner.khemeia.common.block.cedar.*;
 import dev.mrsterner.khemeia.common.block.DwarfInAFlaskBlock;
 import dev.mrsterner.khemeia.common.block.blockentity.DwarfInAFlaskBlockEntity;
@@ -44,6 +45,11 @@ public class KhemeiaObjects {
     public static final Item SOUL_OF_END = register("soul_of_end", new Item(gen()));
     public static final Item OUROBOURUS = register("ouroboros", new Item(gen()));
     public static final Item MO_DEBUG_STICK = register("mo_debug_stick", new KhemeiaDebugItem(gen()));
+
+    public static final Block LIMESTONE = register("limestone", new Block(copyOf(Blocks.STONE)), true);
+    public static final Block COBBLED_LIMESTONE = register("cobbled_limestone", new Block(copyOf(Blocks.COBBLESTONE)), true);
+    public static final Block POLISHED_LIMESTONE = register("polished_limestone", new Block(copyOf(LIMESTONE)), true);
+    public static final Block LIMESTONE_PILLAR = register("limestone_pillar", new LimestonePillar(copyOf(LIMESTONE)), true);
 
     public static final Block STRIPPED_CEDAR_LOG = register("stripped_cedar_log", new PillarBlock(copyOf(Blocks.OAK_LOG)), true);
     public static final Block STRIPPED_CEDAR_WOOD = register("stripped_cedar_wood", new PillarBlock(copyOf(STRIPPED_CEDAR_LOG)), true);

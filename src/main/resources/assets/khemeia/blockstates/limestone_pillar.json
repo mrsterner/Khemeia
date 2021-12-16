@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "pillartype=top": {
+      "model": "khemeia:block/limestone_pillar_top"
+    },
+    "pillartype=middle": {
+      "model": "khemeia:block/limestone_pillar_middle"
+    },
+    "pillartype=bottom": {
+      "model": "khemeia:block/limestone_pillar_bottom"
+    },
+    "pillartype=solo": {
+      "model": "khemeia:block/limestone_pillar"
+    }
+  }
+}
