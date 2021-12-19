@@ -10,6 +10,10 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+loom {
+	accessWidenerPath = file("src/main/resources/alchimia.accesswidener")
+}
+
 repositories {
 	maven {
 		name = 'Ladysnake Mods'
@@ -45,6 +49,9 @@ repositories {
 		name = 'GeckoLib'
 		url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
 	}
+	maven {
+		name = "Patchouli"
+		url 'https://maven.blamejared.com' }
 }
 
 dependencies {
@@ -74,6 +81,12 @@ dependencies {
 
 	//Geckolib
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${gecko_version}"
+
+	//Pathouli
+	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+
+	//REI
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}"
 }
 
 processResources {

@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_top_rh",
+  "textures": {
+    "top": "alchimia:block/cedar_door_top",
+    "bottom": "alchimia:block/cedar_door_bottom"
+  }
+}

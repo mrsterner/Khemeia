@@ -1,7 +1,0 @@
-{
-  "parent": "block/door_bottom_rh",
-  "textures": {
-    "top": "khemeia:block/cedar_door_top",
-    "bottom": "khemeia:block/cedar_door_bottom"
-  }
-}

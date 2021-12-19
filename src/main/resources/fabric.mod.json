@@ -1,41 +1,41 @@
 {
   "schemaVersion": 1,
-  "id": "khemeia",
+  "id": "alchimia",
   "version": "${version}",
 
-  "name": "Khemeia",
+  "name": "Alchimia",
   "description": "Alchemy",
   "authors": [
     "MrSterner"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/mrsterner/khemeia"
+    "sources": "https://github.com/mrsterner/alchimia"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/khemeia/icon.png",
+  "icon": "assets/alchimia/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.mrsterner.khemeia.Khemeia"
+      "dev.mrsterner.alchimia.Alchimia"
     ],
     "client": [
-      "dev.mrsterner.khemeia.KhemeiaClient"
+      "dev.mrsterner.alchimia.AlchimiaClient"
     ],
     "modmenu": [
-      "dev.mrsterner.khemeia.client.compat.KhemeiaModMenu"
+      "dev.mrsterner.alchimia.client.compat.AlchimiaModMenu"
     ],
     "cardinal-components-entity": [
-      "dev.mrsterner.khemeia.common.registry.KhemeiaComponents"
+      "dev.mrsterner.alchimia.common.registry.AlchimiaComponents"
     ],
     "cardinal-components-world": [
-      "dev.mrsterner.khemeia.common.registry.KhemeiaComponents"
+      "dev.mrsterner.alchimia.common.registry.AlchimiaComponents"
     ]
   },
   "mixins": [
-    "khemeia.mixin.json"
+    "alchimia.mixin.json"
   ],
 
   "depends": {
@@ -46,10 +46,11 @@
   },
   "custom": {
     "cardinal-components": [
-      "khemeia:body",
-      "khemeia:mind"
+      "alchimia:body",
+      "alchimia:mind"
     ]
   },
+  "accessWidener": "alchimia.accesswidener",
   "suggests": {
     "another-mod": "*"
   }

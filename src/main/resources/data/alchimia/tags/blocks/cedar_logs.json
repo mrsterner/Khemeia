@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "alchimia:cedar_log",
+    "alchimia:cedar_wood",
+    "alchimia:stripped_cedar_log",
+    "alchimia:stripped_cedar_wood"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "category": "alchimia:tools",
+  "name": "Debug",
+  "priority": true,
+  "icon": "alchimia:mo_debug_stick",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": ""
+    }
+  ]
+}

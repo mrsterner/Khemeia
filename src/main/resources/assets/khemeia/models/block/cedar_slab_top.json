@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab_top",
-  "textures": {
-    "bottom": "khemeia:block/cedar_planks",
-    "top": "khemeia:block/cedar_planks",
-    "side": "khemeia:block/cedar_planks"
-  }
-}

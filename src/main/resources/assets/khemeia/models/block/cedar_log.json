@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "end": "khemeia:block/cedar_log_top",
-    "side": "khemeia:block/cedar_log"
-  }
-}

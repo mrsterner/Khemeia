@@ -1,0 +1,11 @@
+{
+  "name": "item.alchimia.magnum_opus",
+  "landing_text": "item.alchimia.magnum_opus.landing_text",
+  "custom_book_item": "alchimia:magnum_opus",
+  "book_texture": "alchimia:textures/gui/patchouli/book.png",
+  "filler_texture": "alchimia:textures/gui/patchouli/filler.png",
+  "dont_generate_book": true,
+  "link_color": "0000ff",
+  "link_hover_color": "0000ff",
+  "progress_bar_color": "8500b9"
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "pillartype=top": {
+      "model": "alchimia:block/limestone_pillar_top"
+    },
+    "pillartype=middle": {
+      "model": "alchimia:block/limestone_pillar_middle"
+    },
+    "pillartype=bottom": {
+      "model": "alchimia:block/limestone_pillar_bottom"
+    },
+    "pillartype=solo": {
+      "model": "alchimia:block/limestone_pillar"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column_horizontal",
+  "textures": {
+    "end": "alchimia:block/cedar_log_top",
+    "side": "alchimia:block/stripped_cedar_log"
+  }
+}
