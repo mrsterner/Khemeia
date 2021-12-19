@@ -42,6 +42,9 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
 
     public final AnimationFactory factory = new AnimationFactory(this);
     public boolean holdsItem = false;
+    public boolean change = false;
+    private static final int ANIM_OPEN = 1;
+    private static final int ANIM_CLOSED = 0;
     public MagnumOpusItem(Settings settings) {
         super(settings);
         GeckoLibNetwork.registerSyncable(this);
@@ -63,8 +66,18 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if(entity instanceof PlayerEntity player && world.isClient){
+        if(entity instanceof PlayerEntity player && !world.isClient ){
             this.holdsItem = selected;
+            /*
+            if(selected){
+                setAnimation(stack,world, player, ANIM_OPEN);
+                change = false;
+            }else if(!selected){
+                setAnimation(stack,world, player, ANIM_CLOSED);
+                change = true;
+            }
+
+             */
         }
 
 
@@ -74,6 +87,8 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
     private void setAnimation(ItemStack stack, World world,PlayerEntity player, int animation){
         if(!world.isClient) {
             final int id = GeckoLibUtil.guaranteeIDForStack(stack, (ServerWorld) world);
+            final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, "controllerName");
+            controller.markNeedsReload();
             GeckoLibNetwork.syncAnimation(player, this, id, animation);
             for (PlayerEntity otherPlayer : PlayerLookup.tracking(player)) {
                 GeckoLibNetwork.syncAnimation(otherPlayer, this, id, animation);
@@ -82,12 +97,15 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
     }
 
     private <E extends Item & IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+
         if(holdsItem){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.opening", false).addAnimation("animation.magnum_opus.open", true));
             System.out.println(event.getController().getCurrentAnimation());
         }else{
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.closing", false).addAnimation("animation.magnum_opus.closed", true));
         }
+
+
         return PlayState.CONTINUE;
     }
 
@@ -106,16 +124,20 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
         /*
         if (state == ANIM_OPEN) {
             final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, "controllerName");
+            if (controller.getCurrentAnimation() == null || controller.getAnimationState() == AnimationState.Stopped) {
                 controller.markNeedsReload();
-                controller.setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.open", false).addAnimation("animation.magnum_opus.open", true));
+                controller.setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.opening", false).addAnimation("animation.magnum_opus.open", true));
+                System.out.println("open in: "+controller.getCurrentAnimation());
+            }
 
         }
-        else if(state == ANIM_CLOSED) {
+        if(state == ANIM_CLOSED) {
             final AnimationController<?> controller = GeckoLibUtil.getControllerForID(this.factory, id, "controllerName");
-
+            if (controller.getCurrentAnimation() == null || controller.getAnimationState() == AnimationState.Stopped) {
                 controller.markNeedsReload();
                 controller.setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.closed", false));
-
+                System.out.println("close in: "+controller.getCurrentAnimation());
+            }
         }
 
          */
