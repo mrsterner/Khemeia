@@ -20,7 +20,11 @@ in vec4 normal;
 
 out vec4 fragColor;
 
-uniform float BotaniaGrainIntensity;
+uniform float GrainIntensity;
+uniform float glow_intensity = 1;
+uniform float glow_threshold = .5;
+uniform float glow_size = .5;
+uniform vec3 glow_colour = vec3(0, 0, 0);
 
 float rand(vec2 co) {
     return fract(sin(dot(co.xy, vec2(12.9898,78.233))) * 43758.5453);
@@ -35,11 +39,11 @@ void main() {
     color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
     color *= lightMapColor;
 
-    // Botania - Grayscale + Noise with grain intensity
     float r = rand(texCoord0);
-    vec3 offset = BotaniaGrainIntensity * vec3(r, r, r);
-    float gs = (color.r + color.g + color.b) / 50.0;
-    color = vec4(vec3(gs, gs, gs) + offset, color.a);
+    vec3 offset = GrainIntensity * vec3(r, r, r);
+    float gs = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    color = vec4(vec3(gs, gs, gs) + offset, 100);
 
     fragColor = linear_fog(color, vertexDistance, FogStart, FogEnd, FogColor);
+
 }

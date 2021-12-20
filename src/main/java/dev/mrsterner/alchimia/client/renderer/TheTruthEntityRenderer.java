@@ -46,8 +46,8 @@ public class TheTruthEntityRenderer extends BipedEntityRenderer<TheTruthEntity, 
             disfiguration = (0.025F + mobEntity.hurtTime * ((1F - 0.15F) / 20F)) / 2F;
             grainIntensity = 0.05F + mobEntity.hurtTime * ((1F - 0.15F) / 10F);
 
-            shader.getUniform("BotaniaGrainIntensity").set(grainIntensity);
-            shader.getUniform("BotaniaDisfiguration").set(disfiguration);
+            shader.getUniform("GrainIntensity").set(grainIntensity);
+            shader.getUniform("Disfiguration").set(disfiguration);
         }
 
         var view = MinecraftClient.getInstance().getCameraEntity();

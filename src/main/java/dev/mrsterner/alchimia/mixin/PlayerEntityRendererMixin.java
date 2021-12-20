@@ -1,5 +1,6 @@
 package dev.mrsterner.alchimia.mixin;
 
+import dev.mrsterner.alchimia.client.renderer.MouthItemFeatureRenderer;
 import dev.mrsterner.alchimia.common.body.BodyParts;
 import dev.mrsterner.alchimia.common.registry.AlchimiaComponents;
 import net.fabricmc.api.EnvType;
@@ -19,6 +20,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
@@ -35,6 +37,12 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 	private static BipedEntityModel.ArmPose getArmPose(AbstractClientPlayerEntity player, Hand hand) {
 		throw new AssertionError();
 	}
+
+	@Inject(method = "<init>", at = @At("TAIL"))
+	private void PlayerEntityRenderer(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo callbackInfo) {
+		addFeature(new MouthItemFeatureRenderer(this, ctx.getModelLoader()));
+	}
+
 	@Inject(method = "getPositionOffset", at = @At("RETURN"), cancellable = true)
 	public void noOffset(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, CallbackInfoReturnable<Vec3d> callbackInfo){
 		if(!AlchimiaComponents.BODY_COMPONENT.get(abstractClientPlayerEntity).hasBodyPart(BodyParts.LEFTLEG) && !AlchimiaComponents.BODY_COMPONENT.get(abstractClientPlayerEntity).hasBodyPart(BodyParts.RIGHTLEG)){

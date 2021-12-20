@@ -17,9 +17,23 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 public class AlchimiaUtils {
+
+    private static LinkedHashSet<Integer> disabledSlots = new LinkedHashSet<>();
+    public static boolean isDisabled(int slot) {
+        return disabledSlots.contains(slot);
+    }
+
+    public static void lockSlot(int slot) {
+        disabledSlots.add(slot);
+    }
+
+    public static void unlockSlot(int slot) {
+        disabledSlots.remove(slot);
+    }
 
     public static boolean ifMissingArmsLegsTorso(PlayerEntity player){
         return !AlchimiaComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.TORSO) &&
@@ -34,6 +48,22 @@ public class AlchimiaUtils {
                !AlchimiaComponents.BODY_COMPONENT.get(player).hasBodyPart(BodyParts.RIGHTLEG);
     }
 
+    public static void removeBodyPart(PlayerEntity player, BodyParts bodyParts){
+        AlchimiaComponents.BODY_COMPONENT.get(player).setBodyPart(bodyParts, false);
+        switch (bodyParts){
+            case STOMACH -> {}
+            case EYES -> {}
+            case LEFTLEG -> {}
+            case RIGHTLEG -> {}
+            case LEFTARM -> {
+                player.dropItem(player.getOffHandStack(), false);
+                lockSlot(40);
+            }
+            case RIGHTARM -> {player.dropItem(player.getMainHandStack(), false);}
+            case TORSO -> {}
+            case HEAD -> {}
+        }
+    }
 
 
     //Registry

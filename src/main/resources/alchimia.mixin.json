@@ -19,7 +19,12 @@
     "RenderLayerAccessor",
     "GameRendererMixin",
     "ItemInHandRendererMixin",
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "PlayerScreenHandlerMixin",
+    "SlotMixin",
+    "ScreenHandlerMixin",
+    "SlotAccessor",
+    "HeldItemFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

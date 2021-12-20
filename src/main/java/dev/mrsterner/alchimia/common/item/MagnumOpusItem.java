@@ -60,7 +60,6 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
             PatchouliAPI.get().openBookGUI(player, book.id);
             user.playSound(PatchouliSounds.getSound(book.openSound, PatchouliSounds.BOOK_OPEN), 1, (float) (0.7 + Math.random() * 0.4));
         }
-
         return super.use(world, user, hand);
     }
 
@@ -79,8 +78,6 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
 
              */
         }
-
-
         super.inventoryTick(stack, world, entity, slot, selected);
     }
 
@@ -97,10 +94,8 @@ public class MagnumOpusItem extends Item implements IAnimatable, ISyncable {
     }
 
     private <E extends Item & IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-
         if(holdsItem){
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.opening", false).addAnimation("animation.magnum_opus.open", true));
-            System.out.println(event.getController().getCurrentAnimation());
         }else{
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.magnum_opus.closing", false).addAnimation("animation.magnum_opus.closed", true));
         }

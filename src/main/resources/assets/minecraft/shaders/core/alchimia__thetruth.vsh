@@ -28,22 +28,20 @@ out vec2 texCoord0;
 out vec4 normal;
 
 uniform float GameTime;
-uniform float BotaniaDisfiguration;
+uniform float Disfiguration;
 
 float rand(vec2 co) {
     return (fract(sin(dot(co.xy, vec2(12.9898,78.233))) * 43758.5453) - 0.5) * 2;
 }
 
 void main() {
-    // Botania: Blur Position using disfiguration
     float seed = rand(vec2(GameTime, GameTime));
-    vec3 offset = BotaniaDisfiguration * vec3(
+    vec3 offset = Disfiguration * vec3(
     rand(seed * Position.yz),
     rand(seed * Position.xz),
     rand(seed * Position.xy)
     );
     vec3 modifiedPos = Position + offset;
-
     gl_Position = ProjMat * ModelViewMat * vec4(modifiedPos, 1.0);
 
     vertexDistance = length((ModelViewMat * vec4(modifiedPos, 1.0)).xyz);
